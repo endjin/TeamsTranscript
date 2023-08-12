@@ -6,8 +6,12 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
+
 using Spectre.Console.Cli;
+using TeamsTranscript.Abstractions;
 using TeamsTranscript.Abstractions.Parsers;
+using TeamsTranscript.Abstractions.Persistence;
 
 namespace TeamsTranscript.Cli.Commands;
 
@@ -16,11 +20,13 @@ namespace TeamsTranscript.Cli.Commands;
 /// </summary>
 public class ProcessReadableCommand : AsyncCommand<ProcessReadableCommand.Settings>
 {
+    private IServiceProvider serviceProvider;
     private readonly ITranscriptionProcessor processor;
     private readonly ITeamsTranscriptDocumentReader reader;
 
-    public ProcessReadableCommand(ITeamsTranscriptDocumentReader reader, ITranscriptionProcessor processor)
+    public ProcessReadableCommand(IServiceProvider serviceProvider, ITeamsTranscriptDocumentReader reader, ITranscriptionProcessor processor)
     {
+        this.serviceProvider = serviceProvider;
         this.reader = reader;
         this.processor = processor;
     }
@@ -31,44 +37,13 @@ public class ProcessReadableCommand : AsyncCommand<ProcessReadableCommand.Settin
         IEnumerable<Transcription> transcripts = reader.Read(settings.TranscriptionFilePath.FullName);
         IEnumerable<Transcription> merged = processor.Aggregate(transcripts);
 
-        if (settings.OutputFilePath?.Directory is { Exists: false })
-        {
-            settings.OutputFilePath.Directory.Create();
-        }
+        settings.OutputFormat ??= TranscriptFormat.Text;
 
-        switch (settings.OutputFormat)
-        {
-            case OutputFormat.Text:
-            {
-                await PersistAsTextAsync(settings, merged).ConfigureAwait(false);
-                break;
-            }
-            case OutputFormat.Json:
-                await PersistAsJsonAsync(settings, merged).ConfigureAwait(false);
-                break;
-            default: goto case OutputFormat.Text;
-        }           
-        
+        ITranscriptPersistence transcriptPersistence = this.serviceProvider.GetContent<ITranscriptPersistence>(settings.OutputFormat.ToString());
+
+        await transcriptPersistence.PersistAsync(merged, settings.OutputFilePath).ConfigureAwait(false);
+       
         return ReturnCodes.Ok;
-    }
-
-    private static async Task PersistAsJsonAsync(Settings settings, IEnumerable<Transcription> merged)
-    {
-        await File.WriteAllTextAsync(Path.ChangeExtension(settings.OutputFilePath!.FullName, ".json") , JsonSerializer.Serialize(merged, new JsonSerializerOptions { WriteIndented = true })).ConfigureAwait(false);
-    }
-
-    private static async Task PersistAsTextAsync(Settings settings, IEnumerable<Transcription> merged)
-    {
-        StringBuilder sb = new();
-
-        foreach (var transcription in merged)
-        {
-            sb.AppendLine($"{transcription.Start.ToString(@"d\.h\:m\:s\.fff")} --> {transcription.End.ToString(@"d\.h\:m\:s\.fff")}");
-            sb.AppendLine(transcription.Speaker);
-            sb.AppendLine(transcription.Script);
-        }
-
-        await File.WriteAllTextAsync(settings.OutputFilePath!.FullName, sb.ToString()).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -91,15 +66,9 @@ public class ProcessReadableCommand : AsyncCommand<ProcessReadableCommand.Settin
         [Description("Output File Path")]
         public FileInfo OutputFilePath { get; init; }
 
-        [CommandOption("-f|--format <OutputFormat>")]
+        [CommandOption("-f|--format <TranscriptFormat>")]
         [Description("Output Format")]
-        public OutputFormat? OutputFormat { get; init; }
+        public TranscriptFormat? OutputFormat { get; set; }
 #nullable enable annotations
-    }
-
-    public enum OutputFormat
-    {
-        Text = 0,
-        Json = 1,
     }
 }

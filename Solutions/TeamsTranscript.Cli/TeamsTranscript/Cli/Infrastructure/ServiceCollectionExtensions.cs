@@ -2,10 +2,15 @@
 // Copyright (c) Endjin Limited. All rights reserved.
 // </copyright>
 
+using Corvus.ContentHandling;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TeamsTranscript.Abstractions;
 using TeamsTranscript.Abstractions.Parsers;
+using TeamsTranscript.Abstractions.Persistence;
+using TeamsTranscript.Cli.Commands;
 
 namespace TeamsTranscript.Cli.Infrastructure;
 
@@ -26,6 +31,7 @@ public static class ServiceCollectionExtensions
 
         serviceCollection.AddSingleton<IConfiguration>(config);
         serviceCollection.AddCliServices(config);
+        serviceCollection.AddContent();
     }
 
     /// <summary>
@@ -46,5 +52,29 @@ public static class ServiceCollectionExtensions
     {
         serviceCollection.AddTransient<ITeamsTranscriptDocumentReader, TeamsTranscriptOpenXmlDocumentReader>();
         serviceCollection.AddTransient<ITranscriptionProcessor, TranscriptionProcessor>();
+    }
+
+    /// <summary>
+    /// Registers the content management content types with the factory.
+    /// </summary>
+    /// <param name="factory">The factory with which to register the content.</param>
+    /// <returns>The factory with the content registered.</returns>
+    private static ContentFactory RegisterContent(this ContentFactory factory)
+    {
+        // Page Template Readers
+        factory.RegisterTransientContent<TranscriptJsonPersistence>(TranscriptFormat.Json.ToString());
+        factory.RegisterTransientContent<TranscriptTextPersistence>(TranscriptFormat.Text.ToString());
+
+        return factory;
+    }
+
+    /// <summary>
+    /// Add content management content to the container.
+    /// </summary>
+    /// <param name="serviceCollection">The service collection to which to add the content.</param>
+    /// <returns>The service collection wth the content added.</returns>
+    private static IServiceCollection AddContent(this IServiceCollection serviceCollection)
+    {
+        return serviceCollection.AddContent(factory => factory.RegisterContent());
     }
 }

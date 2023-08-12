@@ -21,7 +21,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="NuGet.Readme.md" Pack="true" PackagePath="\readme.md"/>
+        <None Include="NuGet.Readme.md" Pack="true" PackagePath="\readme.md" />
     </ItemGroup>
 
     <ItemGroup>
