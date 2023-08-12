@@ -5,8 +5,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TeamsTranscript.Cli.Parsers;
-using TeamsTranscriptOpenXmlDocumentReader = TeamsTranscript.Cli.Parsers.TeamsTranscriptOpenXmlDocumentReader;
+using TeamsTranscript.Abstractions.Parsers;
 
 namespace TeamsTranscript.Cli.Infrastructure;
 

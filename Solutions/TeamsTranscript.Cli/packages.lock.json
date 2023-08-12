@@ -2,15 +2,6 @@
   "version": 1,
   "dependencies": {
     "net7.0": {
-      "DocumentFormat.OpenXml": {
-        "type": "Direct",
-        "requested": "[2.20.0, )",
-        "resolved": "2.20.0",
-        "contentHash": "+oFMsEppo/W6KpGTRXaJl2jTFYn9zeon4FaZuDoCijQ1/0JaPENaCef7d4Y3f8v116eKhVBwd4Ya+/NDglxkjw==",
-        "dependencies": {
-          "System.IO.Packaging": "4.7.0"
-        }
-      },
       "Microsoft.Extensions.Configuration": {
         "type": "Direct",
         "requested": "[7.0.0, )",
@@ -85,6 +76,14 @@
         "contentHash": "S2cZCbve4fAgRtigNUNZbF+NLQJcAapSqSbbDYqLtqXJcIZ6tKiRTveYe05d+oLY2bAmP7sgnLdzVknGXruy2Q==",
         "dependencies": {
           "Spectre.Console": "0.47.0"
+        }
+      },
+      "DocumentFormat.OpenXml": {
+        "type": "Transitive",
+        "resolved": "2.20.0",
+        "contentHash": "+oFMsEppo/W6KpGTRXaJl2jTFYn9zeon4FaZuDoCijQ1/0JaPENaCef7d4Y3f8v116eKhVBwd4Ya+/NDglxkjw==",
+        "dependencies": {
+          "System.IO.Packaging": "4.7.0"
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions": {
@@ -210,6 +209,12 @@
         "contentHash": "DaGSsVqKsn/ia6RG8frjwmJonfos0srquhw09TlT8KRw5I43E+4gs+/bZj4K0vShJ5H9imCuXupb4RmS+dBy3w==",
         "dependencies": {
           "System.Text.Encodings.Web": "7.0.0"
+        }
+      },
+      "teamstranscript.abstractions": {
+        "type": "Project",
+        "dependencies": {
+          "DocumentFormat.OpenXml": "[2.20.0, )"
         }
       }
     }

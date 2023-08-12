@@ -2,7 +2,7 @@
 // Copyright (c) Endjin Limited. All rights reserved.
 // </copyright>
 
-namespace TeamsTranscript.Cli.Parsers;
+namespace TeamsTranscript.Abstractions.Parsers;
 
 public class TranscriptionProcessor : ITranscriptionProcessor
 {

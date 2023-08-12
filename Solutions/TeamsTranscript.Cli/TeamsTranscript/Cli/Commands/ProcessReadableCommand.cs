@@ -7,8 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json;
 using Spectre.Console.Cli;
-using TeamsTranscript.Cli.Abstractions;
-using TeamsTranscript.Cli.Parsers;
+using TeamsTranscript.Abstractions.Parsers;
 
 namespace TeamsTranscript.Cli.Commands;
 
