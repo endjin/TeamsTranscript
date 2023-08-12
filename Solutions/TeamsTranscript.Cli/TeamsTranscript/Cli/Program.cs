@@ -1,24 +1,44 @@
-﻿using System;
-using System.CommandLine.Parsing;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Spectre.Console.Cli;
+using TeamsTranscript.Cli.Commands;
 using TeamsTranscript.Cli.Infrastructure;
+using TeamsTranscript.Cli.Infrastructure.Injection;
 
-namespace TeamsTranscript.Cli
+namespace TeamsTranscript.Cli;
+
+public static class Program
 {
-    public static class Program
+    public static Task<int> Main(string[] args)
     {
-        private static readonly ServiceCollection ServiceCollection = new();
+        ServiceCollection registrations = new();
+        registrations.ConfigureDependencies();
 
-        public static async Task<int> Main(string[] args)
+        TypeRegistrar registrar = new(registrations);
+        CommandApp app = new(registrar);
+
+        app.Configure(config =>
         {
-            ICompositeConsole console = new CompositeConsole();
-            Console.OutputEncoding = Encoding.UTF8;
+            config.Settings.PropagateExceptions = false;
+            config.CaseSensitivity(CaseSensitivity.None);
+            config.SetApplicationName("transcript");
 
-            return await new CommandLineParser(
-                console,
-                ServiceCollection).Create().InvokeAsync(args, console).ConfigureAwait(false);
-        }
+            config.AddExample("process", "readable", "-t", "transcript.docx", "-o", "transcript.txt");
+            config.AddExample("process", "readable", "-t", "transcript.docx", "-o", "transcript.txt", "-f", "text");
+            config.AddExample("process", "readable", "-t", "transcript.docx", "-o", "transcript.txt", "-f", "json");
+            config.AddExample("process", "readable", "--transcript-path", "transcript.docx", "--output-path", "transcript.txt");
+            config.AddExample("process", "readable", "--transcript-path", "transcript.docx", "--output-path", "transcript.txt", "--format", "text");
+            config.AddExample("process", "readable", "--transcript-path", "transcript.docx", "--output-path", "transcript.txt", "--format", "json");
+
+            config.AddBranch("process", process =>
+            {
+                process.SetDescription("Operations to process the Teams Transcript.");
+                process.AddCommand<ProcessReadableCommand>("readable")
+                       .WithDescription("Converts the transcripts into a readable format by merging concurrent speaker blocks");
+            });
+
+            config.ValidateExamples();
+        });
+
+        return app.RunAsync(args);
     }
 }

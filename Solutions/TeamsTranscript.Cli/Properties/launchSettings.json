@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TeamTranscriptParser": {
+      "commandName": "Project",
+      "commandLineArgs": "process readable -t \"C:\\_Projects\\Customers\\AlixPartners\\clients-ap-mxrv2\\transcripts\\docx\\endjin  MXR Phase II_2023-08-08.docx\" -o \"C:\\_Projects\\Customers\\AlixPartners\\clients-ap-mxrv2\\transcripts\\txt\\endjin  MXR Phase II_2023-08-08.txt\" -f text"
+    }
+  }
+}

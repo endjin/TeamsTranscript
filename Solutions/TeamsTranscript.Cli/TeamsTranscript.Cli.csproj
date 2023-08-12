@@ -1,17 +1,55 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="$(EndjinProjectPropsPath)" Condition="$(EndjinProjectPropsPath) != ''" />
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace />
-    <AssemblyName>teams-transcript-cli</AssemblyName>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.13.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-    <PackageReference Include="Spectre.Console" Version="0.41.0" />
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
-  </ItemGroup>
+    <PropertyGroup>
+        <PackAsTool>true</PackAsTool>
+        <ToolCommandName>teams-transcript</ToolCommandName>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageDescription></PackageDescription>
+        <PackageReleaseNotes></PackageReleaseNotes>
+        <Copyright>Copyright (c) Endjin Limited 2023. All rights reserved.</Copyright>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <RestoreLockedMode Condition="$(ContinuousIntegrationBuild) == 'true'">true</RestoreLockedMode>
+        <RootNamespace />
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="Spectre.Console" Version="0.47.0" />
+        <PackageReference Include="Spectre.Console.Cli" Version="0.47.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="NuGet.Readme.md" Pack="true" PackagePath="\readme.md"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Spectre.Console.Analyzer" Version="0.47.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\TeamsTranscript.Abstractions\TeamsTranscript.Abstractions.csproj" />
+    </ItemGroup>
 
 </Project>

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net7.0": {
+      "DocumentFormat.OpenXml": {
+        "type": "Direct",
+        "requested": "[2.20.0, )",
+        "resolved": "2.20.0",
+        "contentHash": "+oFMsEppo/W6KpGTRXaJl2jTFYn9zeon4FaZuDoCijQ1/0JaPENaCef7d4Y3f8v116eKhVBwd4Ya+/NDglxkjw==",
+        "dependencies": {
+          "System.IO.Packaging": "4.7.0"
+        }
+      },
+      "System.IO.Packaging": {
+        "type": "Transitive",
+        "resolved": "4.7.0",
+        "contentHash": "9VV4KAbgRQZ79iEoG40KIeZy38O30oWwewScAST879+oki8g/Wa2HXZQgrhDDxQM4GkP1PnRJll05NMiVPbYAw=="
+      }
+    }
+  }
+}
