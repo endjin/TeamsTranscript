@@ -38,6 +38,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Include="NuGet.Readme.md" Pack="true" PackagePath="\readme.md"/>
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Spectre.Console.Analyzer" Version="0.47.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

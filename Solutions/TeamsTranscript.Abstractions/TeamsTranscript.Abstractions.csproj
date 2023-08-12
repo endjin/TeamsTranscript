@@ -21,6 +21,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="NuGet.Readme.md" Pack="true" PackagePath="\readme.md"/>
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="DocumentFormat.OpenXml" Version="2.20.0" />
     </ItemGroup>
 
