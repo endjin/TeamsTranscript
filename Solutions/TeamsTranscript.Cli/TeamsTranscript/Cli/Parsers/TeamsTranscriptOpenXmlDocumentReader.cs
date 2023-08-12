@@ -32,7 +32,7 @@ namespace TeamsTranscript.Cli.Parsers
                     }
                 }
 
-                Regex regex = new(@"(?<timestamp1>(\d{2}(:?|.?)){3}(\d{3}))\s-->\s(?<timestamp2>(\d{2}(:?|.?)){3}(\d{3}))\r\n(?<speaker>.*)\r\n(?<script>.*)");
+                Regex regex = new(@"(?<timestamp1>(\d{1,3}(:?|.?)){3}(\d{1,3}))\s-->\s(?<timestamp2>(\d{1,3}(:?|.?)){3}(\d{1,3}))\r?\n(?<speaker>.*)\r?\n(?<script>.*)");
 
                 foreach (Match match in regex.Matches(sb.ToString()))
                 {
