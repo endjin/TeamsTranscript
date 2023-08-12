@@ -2,37 +2,34 @@
 // Copyright (c) Endjin Limited. All rights reserved.
 // </copyright>
 
-using System.Collections.Generic;
+namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Parsers;
 
-namespace TeamsTranscript.Cli.Parsers
+public class TranscriptionProcessor : ITranscriptionProcessor
 {
-    public class TranscriptionProcessor : ITranscriptionProcessor
+    public IEnumerable<Transcription> Aggregate(IEnumerable<Transcription> transcripts) 
     {
-        public IEnumerable<Transcription> Aggregate(IEnumerable<Transcription> transcripts) 
+        Transcription previous = null;
+        Transcription output = null;
+
+        foreach (Transcription current in transcripts)
         {
-            Transcription previous = null;
-            Transcription output = null;
-
-            foreach (var current in transcripts)
+            if (previous == null || current.Speaker != previous.Speaker)
             {
-                if (previous == null || current.Speaker != previous.Speaker)
+                if (output != null)
                 {
-                    if (output != null)
-                    {
-                        yield return output;
-                    }
-
-                    output = current;
-                }
-                else
-                {
-                    output = new Transcription(output.Start, current.End, output.Speaker, output.Script + current.Script);
+                    yield return output;
                 }
 
-                previous = current;
+                output = current;
+            }
+            else
+            {
+                output = new Transcription(output.Start, current.End, output.Speaker, output.Script + " " + current.Script);
             }
 
-            yield return output;
+            previous = current;
         }
+
+        yield return output;
     }
 }

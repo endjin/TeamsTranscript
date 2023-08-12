@@ -2,12 +2,9 @@
 // Copyright (c) Endjin Limited. All rights reserved.
 // </copyright>
 
-using System.Collections.Generic;
+namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Parsers;
 
-namespace TeamsTranscript.Cli.Parsers
+public interface ITranscriptionProcessor
 {
-    public interface ITranscriptionProcessor
-    {
-        IEnumerable<Transcription> Aggregate(IEnumerable<Transcription> transcripts);
-    }
+    IEnumerable<Transcription> Aggregate(IEnumerable<Transcription> transcripts);
 }

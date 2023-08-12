@@ -2,9 +2,6 @@
 // Copyright (c) Endjin Limited. All rights reserved.
 // </copyright>
 
-using System;
+namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Parsers;
 
-namespace TeamsTranscript.Cli.Parsers
-{
-    public record Transcription(TimeSpan Start, TimeSpan End, string Speaker, string Script); 
-}
+public record Transcription(TimeSpan Start, TimeSpan End, string Speaker, string Script);

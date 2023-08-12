@@ -1,17 +1,34 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="$(EndjinProjectPropsPath)" Condition="$(EndjinProjectPropsPath) != ''" />
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace />
-    <AssemblyName>teams-transcript-cli</AssemblyName>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.20.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Spectre.Console" Version="0.47.0" />
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
-  </ItemGroup>
+	<PropertyGroup>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageDescription></PackageDescription>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<Copyright>Copyright (c) Endjin Limited 2023. All rights reserved.</Copyright>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+		<RestoreLockedMode Condition="$(ContinuousIntegrationBuild) == 'true'">true</RestoreLockedMode>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DocumentFormat.OpenXml" Version="2.20.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Spectre.Console" Version="0.47.0" />
+		<PackageReference Include="Spectre.Console.Cli" Version="0.47.0" />
+	</ItemGroup>
 
 </Project>
