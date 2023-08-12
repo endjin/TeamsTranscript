@@ -5,7 +5,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 
-namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Infrastructure.Injection;
+namespace TeamsTranscript.Cli.Infrastructure.Injection;
 
 /// <summary>
 /// Creates a type resolver from a service collection.

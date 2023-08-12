@@ -2,7 +2,7 @@
 // Copyright (c) Endjin Limited. All rights reserved.
 // </copyright>
 
-namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Abstractions;
+namespace TeamsTranscript.Cli.Abstractions;
 
 public class ReturnCodes
 {

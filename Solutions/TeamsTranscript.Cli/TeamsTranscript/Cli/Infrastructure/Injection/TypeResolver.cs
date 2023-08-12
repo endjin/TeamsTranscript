@@ -4,7 +4,7 @@
 
 using Spectre.Console.Cli;
 
-namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Infrastructure.Injection;
+namespace TeamsTranscript.Cli.Infrastructure.Injection;
 
 /// <summary>
 /// Implementation of <see cref="ITypeResolver"/> that uses the <see cref="IServiceProvider"/> to resolve types.

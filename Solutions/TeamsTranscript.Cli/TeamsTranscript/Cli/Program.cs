@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-
 using Spectre.Console.Cli;
+using TeamsTranscript.Cli.Commands;
+using TeamsTranscript.Cli.Infrastructure;
+using TeamsTranscript.Cli.Infrastructure.Injection;
 
-using TeamsTranscript.Cli.TeamsTranscript.Cli.Commands;
-using TeamsTranscript.Cli.TeamsTranscript.Cli.Infrastructure;
-using TeamsTranscript.Cli.TeamsTranscript.Cli.Infrastructure.Injection;
-
-namespace TeamsTranscript.Cli.TeamsTranscript.Cli;
+namespace TeamsTranscript.Cli;
 
 public static class Program
 {

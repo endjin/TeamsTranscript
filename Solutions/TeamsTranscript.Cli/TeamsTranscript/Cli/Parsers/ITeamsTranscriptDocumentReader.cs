@@ -2,7 +2,7 @@
 // Copyright (c) Endjin Limited. All rights reserved.
 // </copyright>
 
-namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Parsers;
+namespace TeamsTranscript.Cli.Parsers;
 
 public interface ITeamsTranscriptDocumentReader
 {

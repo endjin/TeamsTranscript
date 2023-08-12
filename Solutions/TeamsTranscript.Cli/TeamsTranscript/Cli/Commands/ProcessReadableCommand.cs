@@ -7,10 +7,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json;
 using Spectre.Console.Cli;
-using TeamsTranscript.Cli.TeamsTranscript.Cli.Abstractions;
-using TeamsTranscript.Cli.TeamsTranscript.Cli.Parsers;
+using TeamsTranscript.Cli.Abstractions;
+using TeamsTranscript.Cli.Parsers;
 
-namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Commands;
+namespace TeamsTranscript.Cli.Commands;
 
 /// <summary>
 /// A command to set the enrichment configuration for a feed collection.

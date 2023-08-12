@@ -5,10 +5,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TeamsTranscript.Cli.TeamsTranscript.Cli.Parsers;
-using TeamsTranscriptOpenXmlDocumentReader = TeamsTranscript.Cli.TeamsTranscript.Cli.Parsers.TeamsTranscriptOpenXmlDocumentReader;
+using TeamsTranscript.Cli.Parsers;
+using TeamsTranscriptOpenXmlDocumentReader = TeamsTranscript.Cli.Parsers.TeamsTranscriptOpenXmlDocumentReader;
 
-namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Infrastructure;
+namespace TeamsTranscript.Cli.Infrastructure;
 
 /// <summary>
 /// Extension methods for <see cref="IServiceCollection"/>.

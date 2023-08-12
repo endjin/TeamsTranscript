@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 
-namespace TeamsTranscript.Cli.TeamsTranscript.Cli.Parsers;
+namespace TeamsTranscript.Cli.Parsers;
 
 public partial class TeamsTranscriptOpenXmlDocumentReader : ITeamsTranscriptDocumentReader
 {
