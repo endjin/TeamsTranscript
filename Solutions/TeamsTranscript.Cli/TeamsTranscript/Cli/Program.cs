@@ -20,7 +20,7 @@ public static class Program
         {
             config.Settings.PropagateExceptions = false;
             config.CaseSensitivity(CaseSensitivity.None);
-            config.SetApplicationName("transcript");
+            config.SetApplicationName("teams-transcript");
 
             config.AddExample("process", "readable", "-t", "transcript.docx", "-o", "transcript.txt");
             config.AddExample("process", "readable", "-t", "transcript.docx", "-o", "transcript.txt", "-f", "text");

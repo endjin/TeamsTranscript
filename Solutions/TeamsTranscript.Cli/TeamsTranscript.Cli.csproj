@@ -25,6 +25,7 @@
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <RestoreLockedMode Condition="$(ContinuousIntegrationBuild) == 'true'">true</RestoreLockedMode>
         <RootNamespace />
+        <AssemblyName>teams-transcript</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -38,7 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="NuGet.Readme.md" Pack="true" PackagePath="\readme.md"/>
+        <None Include="NuGet.Readme.md" Pack="true" PackagePath="\readme.md" />
     </ItemGroup>
 
     <ItemGroup>
