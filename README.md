@@ -1,4 +1,4 @@
-# TeamsTranscript.Cli
+# TeamsTranscript
 A CLI Tool for manipulating Microsoft Teams Call Transcripts
 
 ## Usage
