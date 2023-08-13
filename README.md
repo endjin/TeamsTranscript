@@ -1,4 +1,5 @@
-# TeamsTranscript
+# Teams Transcript
+
 A CLI Tool for manipulating Microsoft Teams Call Transcripts
 
 ## Usage
@@ -10,12 +11,12 @@ Commands:
 This converts the standard .docx transcript into a .txt or .json file where all contiguous transcription entries by the same speaker are merged into a single transcription block for ease of reading or processing.
 
 ```
-process readable -t transcript.docx -o transcript.txt
-process readable -t transcript.docx -o transcript.txt -f text
-process readable -t transcript.docx -o transcript.json -f json
-process readable --transcript-path transcript.docx --output-path transcript.txt 
-process readable --transcript-path transcript.docx --output-path transcript.txt --format text
-process readable --transcript-path transcript.docx --output-path transcript.json--format json
+.\teams-transcript.exe process readable -t transcript.docx -o transcript.txt
+.\teams-transcript.exe process readable -t transcript.docx -o transcript.txt -f text
+.\teams-transcript.exe process readable -t transcript.docx -o transcript.json -f json
+.\teams-transcript.exe process readable --transcript-path transcript.docx --output-path transcript.txt 
+.\teams-transcript.exe process readable --transcript-path transcript.docx --output-path transcript.txt --format text
+.\teams-transcript.exe process readable --transcript-path transcript.docx --output-path transcript.json--format json
 ```
 
 Given the following transcript (in a .docx):
