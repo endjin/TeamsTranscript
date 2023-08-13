@@ -1,6 +1,6 @@
 # Teams Transcript
 
-A CLI Tool for manipulating Microsoft Teams Call Transcripts
+A CLI Tool for manipulating Microsoft Teams Call Transcripts. It can be used to process transcripts to make them more readable by humans, or convert into formats that are easier to process for use with LLMs.
 
 ## Usage
 
