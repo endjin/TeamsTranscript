@@ -7,9 +7,99 @@ Commands:
 
 `process readable`
 
-This converts the standard .docx transcript into a .txt file where all contiguous transcription entries by the same speaker are merged into a single transcription block for ease of reading.
+This converts the standard .docx transcript into a .txt or .json file where all contiguous transcription entries by the same speaker are merged into a single transcription block for ease of reading or processing.
 
-`teams-transcript-cli process readable <Transcript-File-Path> <Output-File-Path>` 
+```
+process readable -t transcript.docx -o transcript.txt
+process readable -t transcript.docx -o transcript.txt -f text
+process readable -t transcript.docx -o transcript.json -f json
+process readable --transcript-path transcript.docx --output-path transcript.txt 
+process readable --transcript-path transcript.docx --output-path transcript.txt --format text
+process readable --transcript-path transcript.docx --output-path transcript.json--format json
+```
+
+Given the following transcript (in a .docx):
+
+```
+0:0:0.0 --> 0:0:1.250
+Jane Doe
+Hi I'm Jane Doe, CEO
+0:0:2.90 --> 0:0:4.480
+John Doe
+Hi, I'm John Doe, no relation, Ha! COO.
+0:0:3.520 --> 0:0:5.460
+Jane Doe
+Today I want to discuss the plans for the next financial year.
+0:0:5.300 --> 0:0:5.910
+Jane Doe
+This year has been turbulent, next year is predicted to be too.
+0:0:7.80 --> 0:0:8.180
+John Doe
+And the turbulence hasn't been restricted to a single region.
+0:0:8.810 --> 0:0:9.500
+John Doe
+It's been a global trend.
+0:0:10.690 --> 0:0:11.510
+Jane Doe
+And that's what's worrisome, and why we need a plan.
+```
+
+`process readable -t transcript.docx -o transcript.txt -f text` produces:
+
+```
+0.0:0:0.000 --> 0.0:0:1.250
+Jane Doe
+Hi I'm 
+0.0:0:2.900 --> 0.0:0:4.480
+John Doe
+Hi, I'm John Doe, no relation, Ha! COO.
+0.0:0:3.520 --> 0.0:0:5.910
+Jane Doe
+Today I want to discuss the plans for the next financial year. This year has been turbulent, next year is predicted to be too.
+0.0:0:7.800 --> 0.0:0:9.500
+John Doe
+And the turbulence hasn't been restricted to a single region. It's been a global trend.
+0.0:0:10.690 --> 0.0:0:11.510
+Jane Doe
+And that's what's worrisome, and why we need a plan.
+```
+
+`process readable -t transcript.docx -o transcript.json -f json` produces:
+
+```json
+[
+  {
+    "Start": "00:00:00",
+    "End": "00:00:01.2500000",
+    "Speaker": "Jane Doe",
+    "Script": "Hi I\u0027m "
+  },
+  {
+    "Start": "00:00:02.9000000",
+    "End": "00:00:04.4800000",
+    "Speaker": "John Doe",
+    "Script": "Hi, I\u0027m John Doe, no relation, Ha! COO."
+  },
+  {
+    "Start": "00:00:03.5200000",
+    "End": "00:00:05.9100000",
+    "Speaker": "Jane Doe",
+    "Script": "Today I want to discuss the plans for the next financial year. This year has been turbulent, next year is predicted to be too."
+  },
+  {
+    "Start": "00:00:07.8000000",
+    "End": "00:00:09.5000000",
+    "Speaker": "John Doe",
+    "Script": "And the turbulence hasn\u0027t been restricted to a single region. It\u0027s been a global trend"
+  },
+  {
+    "Start": "00:00:10.6900000",
+    "End": "00:00:11.5100000",
+    "Speaker": "Jane Doe",
+    "Script": "And that's what's worrisome, and why we need a plan."
+  }
+]
+```
 
 ## Licenses
 
