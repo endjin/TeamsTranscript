@@ -50,7 +50,7 @@ And that's what's worrisome, and why we need a plan.
 ```
 0.0:0:0.000 --> 0.0:0:1.250
 Jane Doe
-Hi I'm 
+Hi! I'm Jane Doe, CEO.
 0.0:0:2.900 --> 0.0:0:4.480
 John Doe
 Hi, I'm John Doe, no relation, Ha! COO.
@@ -59,7 +59,7 @@ Jane Doe
 Today I want to discuss the plans for the next financial year. This year has been turbulent, next year is predicted to be too.
 0.0:0:7.800 --> 0.0:0:9.500
 John Doe
-And the turbulence hasn't been restricted to a single region. It's been a global trend.
+And the turbulence hasn't been restricted to a single region. It's been a global trend
 0.0:0:10.690 --> 0.0:0:11.510
 Jane Doe
 And that's what's worrisome, and why we need a plan.
@@ -73,7 +73,7 @@ And that's what's worrisome, and why we need a plan.
     "Start": "00:00:00",
     "End": "00:00:01.2500000",
     "Speaker": "Jane Doe",
-    "Script": "Hi I\u0027m "
+    "Script": "Hi! I\u0027m Jane Doe, CEO."
   },
   {
     "Start": "00:00:02.9000000",
@@ -97,7 +97,7 @@ And that's what's worrisome, and why we need a plan.
     "Start": "00:00:10.6900000",
     "End": "00:00:11.5100000",
     "Speaker": "Jane Doe",
-    "Script": "And that's what's worrisome, and why we need a plan."
+    "Script": "And that\u0027s what\u0027s worrisome, and why we need a plan."
   }
 ]
 ```
