@@ -9,11 +9,11 @@ using DocumentFormat.OpenXml.Packaging;
 
 namespace TeamsTranscript.Abstractions.Parsers;
 
-public partial class TeamsTranscriptOpenXmlDocumentReader : ITeamsTranscriptDocumentReader
+public class TeamsTranscriptOpenXmlDocumentReader : ITeamsTranscriptDocumentReader
 {
-    public IEnumerable<Transcription> Read(string path)
+    public string Read(Stream contents)
     {
-        using var doc = WordprocessingDocument.Open(path, false);
+        using WordprocessingDocument doc = WordprocessingDocument.Open(contents, isEditable: false);
         StringBuilder sb = new();
         IEnumerable<OpenXmlElement>? elements = doc.MainDocumentPart?.Document?.Body?.Elements();
 
@@ -33,23 +33,7 @@ public partial class TeamsTranscriptOpenXmlDocumentReader : ITeamsTranscriptDocu
                 }
             }
         }
-        else
-        {
-            yield break;
-        }
-        
-        Regex regex = TranscriptionEntryRegex();
 
-        foreach (Match match in regex.Matches(sb.ToString()))
-        {
-            yield return new Transcription(
-                TimeSpan.Parse(match.Groups["timestamp1"].Value),
-                TimeSpan.Parse(match.Groups["timestamp2"].Value),
-                match.Groups["speaker"].Value,
-                match.Groups["script"].Value);
-        }
+        return sb.ToString();
     }
-
-    [GeneratedRegex("(?<timestamp1>(\\d{1,3}(:?|.?)){3}(\\d{1,3}))\\s-->\\s(?<timestamp2>(\\d{1,3}(:?|.?)){3}(\\d{1,3}))\\r?\\n(?<speaker>.*)\\r\\n(?<script>.*)\\r\\n")]
-    private static partial Regex TranscriptionEntryRegex();
 }

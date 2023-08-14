@@ -4,8 +4,6 @@
 
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
-using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 
 using Spectre.Console.Cli;
@@ -20,21 +18,25 @@ namespace TeamsTranscript.Cli.Commands;
 /// </summary>
 public class ProcessReadableCommand : AsyncCommand<ProcessReadableCommand.Settings>
 {
-    private IServiceProvider serviceProvider;
+    private readonly IServiceProvider serviceProvider;
+    private readonly ITranscriptionParser parser;
     private readonly ITranscriptionProcessor processor;
     private readonly ITeamsTranscriptDocumentReader reader;
 
-    public ProcessReadableCommand(IServiceProvider serviceProvider, ITeamsTranscriptDocumentReader reader, ITranscriptionProcessor processor)
+    public ProcessReadableCommand(IServiceProvider serviceProvider, ITeamsTranscriptDocumentReader reader, ITranscriptionProcessor processor, ITranscriptionParser parser)
     {
         this.serviceProvider = serviceProvider;
         this.reader = reader;
         this.processor = processor;
+        this.parser = parser;
     }
 
     /// <inheritdoc/>
     public override async Task<int> ExecuteAsync([NotNull] CommandContext context, [NotNull] Settings settings)
     {
-        IEnumerable<Transcription> transcripts = reader.Read(settings.TranscriptionFilePath.FullName);
+        await using Stream stream = File.OpenRead(settings.TranscriptionFilePath.FullName);
+        string content = reader.Read(stream);
+        IEnumerable<Transcription> transcripts = parser.Parse(content);
         IEnumerable<Transcription> merged = processor.Aggregate(transcripts);
 
         settings.OutputFormat ??= TranscriptFormat.Text;

@@ -51,6 +51,7 @@ public static class ServiceCollectionExtensions
     private static void AddTranscriptionServices(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddTransient<ITeamsTranscriptDocumentReader, TeamsTranscriptOpenXmlDocumentReader>();
+        serviceCollection.AddTransient<ITranscriptionParser, RegExpTranscriptionParser>();
         serviceCollection.AddTransient<ITranscriptionProcessor, TranscriptionProcessor>();
     }
 

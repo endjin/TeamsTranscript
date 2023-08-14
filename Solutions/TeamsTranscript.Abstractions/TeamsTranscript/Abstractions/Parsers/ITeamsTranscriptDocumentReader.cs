@@ -6,5 +6,5 @@ namespace TeamsTranscript.Abstractions.Parsers;
 
 public interface ITeamsTranscriptDocumentReader
 {
-    IEnumerable<Transcription> Read(string path);
+    string Read(Stream content);
 }
