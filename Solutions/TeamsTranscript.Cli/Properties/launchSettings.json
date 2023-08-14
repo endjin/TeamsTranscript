@@ -1,8 +1,7 @@
 {
   "profiles": {
-    "TeamTranscriptParser": {
-      "commandName": "Project",
-      "commandLineArgs": "process readable -t <TRANSCRIPT> -o <OUTPUT> -f text"
+    "TeamsTranscript.Cli": {
+      "commandName": "Project"
     }
   }
 }

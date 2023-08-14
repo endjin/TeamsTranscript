@@ -6,11 +6,12 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+	    <RootNamespace />
     </PropertyGroup>
 
     <PropertyGroup>
         <PackAsTool>true</PackAsTool>
-        <ToolCommandName>teams-transcript</ToolCommandName>
+	    <ToolCommandName>teams-transcript</ToolCommandName>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -24,7 +25,6 @@
     <PropertyGroup>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <RestoreLockedMode Condition="$(ContinuousIntegrationBuild) == 'true'">true</RestoreLockedMode>
-        <RootNamespace />
         <AssemblyName>teams-transcript</AssemblyName>
     </PropertyGroup>
 
