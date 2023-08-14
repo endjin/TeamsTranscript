@@ -1,0 +1,6 @@
+﻿namespace TeamsTranscript.Abstractions.Persistence;
+
+public interface ITranscriptPersistence
+{
+    Task PersistAsync(IEnumerable<Transcription> transcripts, FileInfo outputFilePath);
+}

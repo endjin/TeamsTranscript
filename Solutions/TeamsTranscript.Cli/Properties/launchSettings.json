@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "TeamsTranscript.Cli": {
+      "commandName": "Project"
+    }
+  }
+}

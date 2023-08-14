@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageDescription></PackageDescription>
+        <PackageReleaseNotes></PackageReleaseNotes>
+        <Copyright>Copyright (c) Endjin Limited 2023. All rights reserved.</Copyright>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <RestoreLockedMode Condition="$(ContinuousIntegrationBuild) == 'true'">true</RestoreLockedMode>
+        <RootNamespace />
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="NuGet.Readme.md" Pack="true" PackagePath="\readme.md" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DocumentFormat.OpenXml" Version="2.20.0" />
+    </ItemGroup>
+
+</Project>
