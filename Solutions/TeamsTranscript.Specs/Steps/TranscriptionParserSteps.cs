@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.TestHost;
-using NUnit.Framework;
-using Shouldly;
+﻿using Shouldly;
 using TeamsTranscript.Abstractions;
 using TeamsTranscript.Abstractions.Parsers;
 using TechTalk.SpecFlow;
@@ -8,12 +6,12 @@ using TechTalk.SpecFlow;
 namespace TeamsTranscript.Specs.Steps;
 
 [Binding]
-public class InitSteps
+public class TranscriptionParserSteps
 {
     private readonly ScenarioContext scenarioContext;
     private readonly ITranscriptionParser parser;
 
-    public InitSteps(ScenarioContext scenarioContext)
+    public TranscriptionParserSteps(ScenarioContext scenarioContext)
     {
         this.scenarioContext = scenarioContext;
         this.parser = new RegExpTranscriptionParser();
