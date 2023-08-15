@@ -2,6 +2,14 @@
 
 A CLI Tool for manipulating Microsoft Teams Call Transcripts. It can be used to process transcripts to make them more readable by humans, or convert into formats that are easier to process for use with LLMs.
 
+## Installation
+
+You can either download the [TeamsTranscript.Abstractions](https://www.nuget.org/packages/TeamsTranscript.Abstractions) nuget package if you want to incorporate the parsing logic in your own application or Polyglot Notebook, or you can install the [teams-transcript](https://www.nuget.org/packages/teams-transcript) .NET Global Tool via the command line:
+
+```bash
+dotnet tool install --global teams-transcript
+```
+
 ## Usage
 
 Commands:
