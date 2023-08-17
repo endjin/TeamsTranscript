@@ -1,9 +1,17 @@
 ﻿using System.Text;
+using TeamsTranscript.Abstractions.Parsers;
 
 namespace TeamsTranscript.Abstractions.Persistence;
 
 public class TranscriptTextPersistence : ITranscriptPersistence
 {
+    private readonly ITranscriptionParser parser;
+
+    public TranscriptTextPersistence(ITranscriptionParser parser)
+    {
+        this.parser = parser;
+    }
+
     public async Task PersistAsync(IEnumerable<Transcription> transcripts, FileInfo outputFilePath)
     {
         if (outputFilePath?.Directory is { Exists: false })
@@ -21,5 +29,20 @@ public class TranscriptTextPersistence : ITranscriptPersistence
         }
 
         await File.WriteAllTextAsync(outputFilePath!.FullName, sb.ToString()).ConfigureAwait(false);
+    }
+
+    public async Task<IEnumerable<Transcription>> RetrieveAsync(FileInfo inputFilePath)
+    {
+        if (inputFilePath is null)
+        {
+            throw new ArgumentNullException(nameof(inputFilePath));
+        }
+
+        if (!inputFilePath.Exists)
+        {
+            throw new FileNotFoundException($"The file {inputFilePath.FullName} does not exist.", inputFilePath.FullName);
+        }
+        
+        return this.parser.Parse(await File.ReadAllTextAsync(inputFilePath.FullName).ConfigureAwait(false)); ;
     }
 }
