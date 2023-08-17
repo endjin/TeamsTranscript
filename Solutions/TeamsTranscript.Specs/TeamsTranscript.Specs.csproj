@@ -11,6 +11,7 @@
 
 	<ItemGroup>
 		<SpecFlowObsoleteCodeBehindFiles Remove="RegExpTranscriptionParser - Copy.feature.cs" />
+		<SpecFlowObsoleteCodeBehindFiles Remove="TranscriptionProcessor - Copy.feature.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -23,12 +24,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="TranscriptionExtensions.feature.cs">
+	    <DependentUpon>TranscriptionExtensions.feature</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Update="specflow.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 
 	<ItemGroup>
+		<SpecFlowFeatureFiles Update="TranscriptionExtensions.feature">
+		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
+		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
 		<SpecFlowFeatureFiles Update="TranscriptionProcessor.feature">
 			<Visible>$(UsingMicrosoftNETSdk)</Visible>
 			<CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
