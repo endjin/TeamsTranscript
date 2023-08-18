@@ -19,7 +19,7 @@ public static class TranscriptionsExtensions
         return string.Join(", ", transcriptions.Participants());
     }
 
-    public static IEnumerable<IEnumerable<Transcription>> MakeGroups(this IEnumerable<Transcription> transcriptions, TimeSpan timeSpan)
+    public static IEnumerable<IEnumerable<Transcription>> Window(this IEnumerable<Transcription> transcriptions, TimeSpan timeSpan)
     {
         TimeSpan lastTimeSpan = TimeSpan.Zero;
 
@@ -27,7 +27,7 @@ public static class TranscriptionsExtensions
 
         foreach (Transcription transcription in transcriptions.OrderBy(t => t.Start))
         {
-            if (transcription.Start - lastTimeSpan > timeSpan)
+            if (transcription.Start - lastTimeSpan >= timeSpan)
             {
                 if (list.Count > 0)
                 {

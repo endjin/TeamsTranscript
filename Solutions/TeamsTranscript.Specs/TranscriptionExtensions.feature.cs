@@ -323,12 +323,12 @@ testRunner.When("I ask for transcriptions between 0:3:0.0 and 0:6:0.0", ((string
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Group Transcriptions by timespan")]
-        public void GroupTranscriptionsByTimespan()
+        [NUnit.Framework.DescriptionAttribute("Group Transcriptions by 1 minute timespan")]
+        public void GroupTranscriptionsBy1MinuteTimespan()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Group Transcriptions by timespan", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Group Transcriptions by 1 minute timespan", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 58
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -383,58 +383,176 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I have the following transcription entries:", ((string)(null)), table8, "Given ");
 #line hidden
 #line 68
-testRunner.When("I ask for transcriptions grouped by 0:1:0.0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I ask for transcriptions grouped by 0:1:0.0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                            "List",
+                            "list",
                             "start",
                             "end",
                             "speaker",
                             "script"});
                 table9.AddRow(new string[] {
-                            "1",
+                            "0",
                             "0:1:0.0",
                             "0:1:1.250",
                             "Joe MacMillan",
                             "Hi I\'m Jane Doe, CEO."});
                 table9.AddRow(new string[] {
-                            "2",
+                            "1",
                             "0:2:2.90",
                             "0:2:4.480",
                             "Gordon Clark",
                             "Hi, I\'m John Doe, no relation, Ha! COO."});
                 table9.AddRow(new string[] {
-                            "3",
+                            "2",
                             "0:3:3.520",
                             "0:3:5.460",
                             "Cameron Howe",
                             "Today I want to discuss the plans for the next financial year."});
                 table9.AddRow(new string[] {
-                            "4",
+                            "3",
                             "0:4:5.300",
                             "0:4:5.910",
                             "Donna Clark",
                             "This year has been turbulent, next year is predicted to be too."});
                 table9.AddRow(new string[] {
-                            "5",
+                            "4",
                             "0:5:7.80",
                             "0:5:8.180",
                             "John Bosworth",
                             "And the turbulence hasn\'t been restricted to a single region."});
                 table9.AddRow(new string[] {
-                            "6",
+                            "5",
                             "0:6:8.810",
                             "0:6:9.500",
                             "Cameron Howe",
                             "It\'s been a global trend"});
                 table9.AddRow(new string[] {
-                            "7",
+                            "6",
                             "0:7:10.690",
                             "0:7:11.510",
                             "Joe MacMillan",
                             "And that\'s what\'s worrisome, and why we need a plan."});
 #line 69
  testRunner.Then("I should get the following grouped transcriptions:", ((string)(null)), table9, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Group Transcriptions by 2 minute timespan")]
+        public void GroupTranscriptionsBy2MinuteTimespan()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Group Transcriptions by 2 minute timespan", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 79
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                            "start",
+                            "end",
+                            "speaker",
+                            "script"});
+                table10.AddRow(new string[] {
+                            "0:1:0.0",
+                            "0:1:1.250",
+                            "Joe MacMillan",
+                            "Hi I\'m Jane Doe, CEO."});
+                table10.AddRow(new string[] {
+                            "0:2:0.0",
+                            "0:2:0.000",
+                            "Gordon Clark",
+                            "Hi, I\'m John Doe, no relation, Ha! COO."});
+                table10.AddRow(new string[] {
+                            "0:3:3.520",
+                            "0:3:5.460",
+                            "Cameron Howe",
+                            "Today I want to discuss the plans for the next financial year."});
+                table10.AddRow(new string[] {
+                            "0:4:5.300",
+                            "0:4:12.910",
+                            "Donna Clark",
+                            "This year has been turbulent, next year is predicted to be too."});
+                table10.AddRow(new string[] {
+                            "0:5:7.80",
+                            "0:5:9.180",
+                            "John Bosworth",
+                            "And the turbulence hasn\'t been restricted to a single region."});
+                table10.AddRow(new string[] {
+                            "0:6:8.810",
+                            "0:6:9.500",
+                            "Cameron Howe",
+                            "It\'s been a global trend"});
+                table10.AddRow(new string[] {
+                            "0:7:10.690",
+                            "0:7:12.510",
+                            "Joe MacMillan",
+                            "And that\'s what\'s worrisome, and why we need a plan."});
+#line 80
+ testRunner.Given("I have the following transcription entries:", ((string)(null)), table10, "Given ");
+#line hidden
+#line 89
+ testRunner.When("I ask for transcriptions grouped by 0:2:0.0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                            "list",
+                            "start",
+                            "end",
+                            "speaker",
+                            "script"});
+                table11.AddRow(new string[] {
+                            "0",
+                            "0:1:0.0",
+                            "0:1:1.250",
+                            "Joe MacMillan",
+                            "Hi I\'m Jane Doe, CEO."});
+                table11.AddRow(new string[] {
+                            "1",
+                            "0:2:0.0",
+                            "0:2:0.000",
+                            "Gordon Clark",
+                            "Hi, I\'m John Doe, no relation, Ha! COO."});
+                table11.AddRow(new string[] {
+                            "1",
+                            "0:3:3.520",
+                            "0:3:5.460",
+                            "Cameron Howe",
+                            "Today I want to discuss the plans for the next financial year."});
+                table11.AddRow(new string[] {
+                            "2",
+                            "0:4:5.300",
+                            "0:4:12.910",
+                            "Donna Clark",
+                            "This year has been turbulent, next year is predicted to be too."});
+                table11.AddRow(new string[] {
+                            "2",
+                            "0:5:7.80",
+                            "0:5:9.180",
+                            "John Bosworth",
+                            "And the turbulence hasn\'t been restricted to a single region."});
+                table11.AddRow(new string[] {
+                            "3",
+                            "0:6:8.810",
+                            "0:6:9.500",
+                            "Cameron Howe",
+                            "It\'s been a global trend"});
+                table11.AddRow(new string[] {
+                            "3",
+                            "0:7:10.690",
+                            "0:7:12.510",
+                            "Joe MacMillan",
+                            "And that\'s what\'s worrisome, and why we need a plan."});
+#line 90
+ testRunner.Then("I should get the following grouped transcriptions:", ((string)(null)), table11, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

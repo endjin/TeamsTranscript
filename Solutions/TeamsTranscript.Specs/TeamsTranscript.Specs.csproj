@@ -27,6 +27,9 @@
 	  <Compile Update="TranscriptionExtensions.feature.cs">
 	    <DependentUpon>TranscriptionExtensions.feature</DependentUpon>
 	  </Compile>
+	  <Compile Update="TranscriptionTransformer.feature.cs">
+	    <DependentUpon>TranscriptionTransformer.feature</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,6 +40,10 @@
 
 	<ItemGroup>
 		<SpecFlowFeatureFiles Update="TranscriptionExtensions.feature">
+		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
+		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+		</SpecFlowFeatureFiles>
+		<SpecFlowFeatureFiles Update="TranscriptionTransformer.feature">
 		  <Visible>$(UsingMicrosoftNETSdk)</Visible>
 		  <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
 		</SpecFlowFeatureFiles>

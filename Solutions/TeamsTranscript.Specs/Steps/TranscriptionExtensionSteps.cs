@@ -1,8 +1,5 @@
-﻿using Microsoft.VisualStudio.TestPlatform.TestHost;
-using NUnit.Framework;
-using Shouldly;
+﻿using Shouldly;
 using TeamsTranscript.Abstractions;
-using TeamsTranscript.Abstractions.Parsers;
 using TechTalk.SpecFlow;
 
 namespace TeamsTranscript.Specs.Steps;
@@ -36,8 +33,7 @@ public class TranscriptionExtensionSteps
     public void WhenIAskForACommaSeparatedListOfParticipants()
     {
         var transcriptions = this.scenarioContext.Get<IEnumerable<Transcription>>("transcriptions");
-        this.scenarioContext.Add("participants_comma_separated_string",
-            transcriptions.ParticipantsAsCommaDelimitedString());
+        this.scenarioContext.Add("participants_comma_separated_string", transcriptions.ParticipantsAsCommaDelimitedString());
     }
 
     [Then(@"I should get a comma separated list of participants with the following content:")]
@@ -79,11 +75,11 @@ public class TranscriptionExtensionSteps
         }
     }
 
-    [When(@"I ask -for transcriptions grouped by (.*)")]
+    [When(@"I ask for transcriptions grouped by (.*)")]
     public void WhenlAskForTranscriptionsGroupedBy(TimeSpan timeSpan)
     {
         var transcriptions = this.scenarioContext.Get<IEnumerable<Transcription>>("transcriptions");
-        IEnumerable<IEnumerable<Transcription>> result = transcriptions.MakeGroups(timeSpan);
+        IEnumerable<IEnumerable<Transcription>> result = transcriptions.Window(timeSpan);
         this.scenarioContext.Add("grouped_results", result);
     }
 
@@ -105,7 +101,36 @@ public class TranscriptionExtensionSteps
 
             if (groups.ContainsKey(index))
             {
+                groups[index].Add(transcription);
+            }
+            else
+            {
+                groups.Add(index, new List<Transcription> { transcription });
+            }
+        }
 
+        List<IEnumerable<Transcription>> results = this.scenarioContext.Get<IEnumerable<IEnumerable<Transcription>>>("grouped_results").ToList();
+
+        results.Count().ShouldBe(groups.Count);
+
+        foreach (KeyValuePair<int, List<Transcription>> group in groups)
+        {
+            var result = results.ElementAt(group.Key);
+            result.Count().ShouldBe(group.Value.Count);
+
+            for (int i = 0; i < result.Count(); i++)
+            {
+                Transcription transcription = result.ElementAt(i);
+
+                string start = group.Value[i].Start.ToString();
+                string end = group.Value[i].End.ToString();
+                string speaker = group.Value[i].Speaker;
+                string script = group.Value[i].Script;
+
+                transcription.Start.ShouldBe(TimeSpan.Parse(start));
+                transcription.End.ShouldBe(TimeSpan.Parse(end));
+                transcription.Speaker.ShouldBe(speaker);
+                transcription.Script.ShouldBe(script);
             }
         }
     }
