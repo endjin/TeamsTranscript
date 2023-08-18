@@ -26,6 +26,11 @@
 
     <ItemGroup>
         <PackageReference Include="DocumentFormat.OpenXml" Version="2.20.0" />
+        <PackageReference Include="System.Reactive" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="TeamsTranscript\Abstractions\Serialization\" />
     </ItemGroup>
 
 </Project>

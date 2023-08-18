@@ -272,6 +272,11 @@
         "resolved": "4.5.5",
         "contentHash": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw=="
       },
+      "System.Reactive": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "31kfaW4ZupZzPsI5PVe77VhnvFF55qgma7KZr/E0iFTs6fmdhhG8j0mgEx620iLTey1EynOkEfnyTjtNEpJzGw=="
+      },
       "System.Reflection": {
         "type": "Transitive",
         "resolved": "4.3.0",
@@ -372,7 +377,8 @@
       "teamstranscript.abstractions": {
         "type": "Project",
         "dependencies": {
-          "DocumentFormat.OpenXml": "[2.20.0, )"
+          "DocumentFormat.OpenXml": "[2.20.0, )",
+          "System.Reactive": "[6.0.0, )"
         }
       }
     }

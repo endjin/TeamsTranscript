@@ -20,24 +20,23 @@ namespace TeamsTranscript.Specs
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("TranscriptionProcessor")]
-    public partial class TranscriptionProcessorFeature
+    [NUnit.Framework.DescriptionAttribute("TranscriptionTransformer")]
+    public partial class TranscriptionTransformerFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "TranscriptionProcessor.feature"
+#line 1 "TranscriptionTransformer.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "TranscriptionProcessor", @"I want to be able to process a list of transcription data structures
-And group contiguous conversation blocks by the same speaker into a single transcription entry
-The timespan should be updated to include the aggregate window, and the script should be concatenated. ", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "TranscriptionTransformer", "I want to be able to process a list of transcription data structures\r\nAnd replace" +
+                    " speaker names with their titles so that Doe, John becomes John Doe", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -76,15 +75,17 @@ The timespan should be updated to include the aggregate window, and the script s
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Process a list of transcription entries")]
+        [NUnit.Framework.DescriptionAttribute("Process a list of transcription entries with speaker names which need transformin" +
+            "g")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        public void ProcessAListOfTranscriptionEntries()
+        public void ProcessAListOfTranscriptionEntriesWithSpeakerNamesWhichNeedTransforming()
         {
             string[] tagsOfScenario = new string[] {
                     "tag1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Process a list of transcription entries", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 8
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Process a list of transcription entries with speaker names which need transformin" +
+                    "g", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -94,87 +95,107 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "start",
                             "end",
                             "speaker",
                             "script"});
-                table12.AddRow(new string[] {
+                table14.AddRow(new string[] {
+                            "0:0:0.0",
+                            "0:0:1.250",
+                            "Doe, Jane",
+                            "Hi I\'m Jane Doe, CEO."});
+                table14.AddRow(new string[] {
+                            "0:0:2.90",
+                            "0:0:4.480",
+                            "Doe, John",
+                            "Hi, I\'m John Doe, no relation, Ha! COO."});
+                table14.AddRow(new string[] {
+                            "0:0:3.520",
+                            "0:0:5.460",
+                            "Doe, Jane",
+                            "Today I want to discuss the plans for the next financial year."});
+                table14.AddRow(new string[] {
+                            "0:0:5.300",
+                            "0:0:5.910",
+                            "Doe, Jane",
+                            "This year has been turbulent, next year is predicted to be too."});
+                table14.AddRow(new string[] {
+                            "0:0:7.80",
+                            "0:0:8.180",
+                            "Doe, John",
+                            "And the turbulence hasn\'t been restricted to a single region."});
+                table14.AddRow(new string[] {
+                            "0:0:8.810",
+                            "0:0:9.500",
+                            "Doe, John",
+                            "It\'s been a global trend"});
+                table14.AddRow(new string[] {
+                            "0:0:10.690",
+                            "0:0:11.510",
+                            "Doe, Jane",
+                            "And that\'s what\'s worrisome, and why we need a plan."});
+#line 8
+ testRunner.Given("I have the following transcription entries:", ((string)(null)), table14, "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                            "old",
+                            "new"});
+                table15.AddRow(new string[] {
+                            "Doe, Jane",
+                            "Jane Doe"});
+                table15.AddRow(new string[] {
+                            "Doe, John",
+                            "John Doe"});
+#line 17
+ testRunner.And("I have the following list of transformations:", ((string)(null)), table15, "And ");
+#line hidden
+#line 21
+ testRunner.When("I transform the Transcription", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                            "start",
+                            "end",
+                            "speaker",
+                            "script"});
+                table16.AddRow(new string[] {
                             "0:0:0.0",
                             "0:0:1.250",
                             "Jane Doe",
                             "Hi I\'m Jane Doe, CEO."});
-                table12.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "0:0:2.90",
                             "0:0:4.480",
                             "John Doe",
                             "Hi, I\'m John Doe, no relation, Ha! COO."});
-                table12.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "0:0:3.520",
                             "0:0:5.460",
                             "Jane Doe",
                             "Today I want to discuss the plans for the next financial year."});
-                table12.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "0:0:5.300",
                             "0:0:5.910",
                             "Jane Doe",
                             "This year has been turbulent, next year is predicted to be too."});
-                table12.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "0:0:7.80",
                             "0:0:8.180",
                             "John Doe",
                             "And the turbulence hasn\'t been restricted to a single region."});
-                table12.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "0:0:8.810",
                             "0:0:9.500",
                             "John Doe",
                             "It\'s been a global trend"});
-                table12.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "0:0:10.690",
                             "0:0:11.510",
                             "Jane Doe",
                             "And that\'s what\'s worrisome, and why we need a plan."});
-#line 9
- testRunner.Given("I have the following transcription entries:", ((string)(null)), table12, "Given ");
-#line hidden
-#line 18
- testRunner.When("I process the Transcription", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
-                            "start",
-                            "end",
-                            "speaker",
-                            "script"});
-                table13.AddRow(new string[] {
-                            "0:0:0.0",
-                            "0:0:1.250",
-                            "Jane Doe",
-                            "Hi I\'m Jane Doe, CEO."});
-                table13.AddRow(new string[] {
-                            "0:0:2.90",
-                            "0:0:4.480",
-                            "John Doe",
-                            "Hi, I\'m John Doe, no relation, Ha! COO."});
-                table13.AddRow(new string[] {
-                            "0:0:3.520",
-                            "0:0:5.910",
-                            "Jane Doe",
-                            "Today I want to discuss the plans for the next financial year. This year has been" +
-                                " turbulent, next year is predicted to be too."});
-                table13.AddRow(new string[] {
-                            "0:0:7.80",
-                            "0:0:9.500",
-                            "John Doe",
-                            "And the turbulence hasn\'t been restricted to a single region. It\'s been a global " +
-                                "trend"});
-                table13.AddRow(new string[] {
-                            "0:0:10.690",
-                            "0:0:11.510",
-                            "Jane Doe",
-                            "And that\'s what\'s worrisome, and why we need a plan."});
-#line 19
+#line 22
  testRunner.Then("I should get a list of aggregated Transcription data structures with the followin" +
-                        "g content:", ((string)(null)), table13, "Then ");
+                        "g content:", ((string)(null)), table16, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
