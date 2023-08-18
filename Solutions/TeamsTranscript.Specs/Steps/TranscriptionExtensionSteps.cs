@@ -36,7 +36,8 @@ public class TranscriptionExtensionSteps
     public void WhenIAskForACommaSeparatedListOfParticipants()
     {
         var transcriptions = this.scenarioContext.Get<IEnumerable<Transcription>>("transcriptions");
-        this.scenarioContext.Add("participants_comma_separated_string", transcriptions.ParticipantsAsCommaDelimitedString());
+        this.scenarioContext.Add("participants_comma_separated_string",
+            transcriptions.ParticipantsAsCommaDelimitedString());
     }
 
     [Then(@"I should get a comma separated list of participants with the following content:")]
@@ -75,6 +76,37 @@ public class TranscriptionExtensionSteps
             transcription.End.ShouldBe(TimeSpan.Parse(end));
             transcription.Speaker.ShouldBe(speaker);
             transcription.Script.ShouldBe(script);
+        }
+    }
+
+    [When(@"I ask -for transcriptions grouped by (.*)")]
+    public void WhenlAskForTranscriptionsGroupedBy(TimeSpan timeSpan)
+    {
+        var transcriptions = this.scenarioContext.Get<IEnumerable<Transcription>>("transcriptions");
+        IEnumerable<IEnumerable<Transcription>> result = transcriptions.MakeGroups(timeSpan);
+        this.scenarioContext.Add("grouped_results", result);
+    }
+
+
+    [Then("I should get the following grouped transcriptions:")]
+    public void ThenIShouldGetTheFollowingGroupedTranscriptions(Table table)
+    {
+        Dictionary<int, List<Transcription>> groups = new();
+
+        foreach (var row in table.Rows)
+        {
+            var index = int.Parse(row["list"]);
+            var start = TimeSpan.Parse(row["start"]);
+            var end = TimeSpan.Parse(row["end"]);
+            var speaker = row["speaker"];
+            var script = row["script"];
+
+            var transcription = new Transcription(start, end, speaker, script);
+
+            if (groups.ContainsKey(index))
+            {
+
+            }
         }
     }
 }
